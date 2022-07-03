@@ -127,7 +127,7 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">CORREGIMIE</th>\
+                        <th scope="row">CORREGIMIENTO</th>\
                         <td>' + (feature.properties['CORREGIMIE'] !== null ? autolinker.link(feature.properties['CORREGIMIE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -136,11 +136,11 @@
                     </tr>\
                     <tr>\
                         <th scope="row">ÁREA</th>\
-                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + ' Ha' + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">PÉRIMETRO</th>\
-                        <td>' + (feature.properties['PÉRIMETRO'] !== null ? autolinker.link(feature.properties['PÉRIMETRO'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['PÉRIMETRO'] !== null ? autolinker.link(feature.properties['PÉRIMETRO'].toLocaleString()) : '') + ' Km' + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -195,11 +195,11 @@
                     </tr>\
                     <tr>\
                         <th scope="row">ÁREA</th>\
-                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + ' Ha' + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">PERÍMETRO</th>\
-                        <td>' + (feature.properties['PERÍMETRO'] !== null ? autolinker.link(feature.properties['PERÍMETRO'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['PERÍMETRO'] !== null ? autolinker.link(feature.properties['PERÍMETRO'].toLocaleString()) : '') + ' Km' + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -251,16 +251,16 @@
                         <td>' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">ESTRA_MODA</th>\
+                        <th scope="row">ESTRATO MODA</th>\
                         <td>' + (feature.properties['ESTRA_MODA'] !== null ? autolinker.link(feature.properties['ESTRA_MODA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">ÁREA</th>\
-                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + ' Ha' + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">PERÍMETRO</th>\
-                        <td>' + (feature.properties['PERÍMETRO'] !== null ? autolinker.link(feature.properties['PERÍMETRO'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['PERÍMETRO'] !== null ? autolinker.link(feature.properties['PERÍMETRO'].toLocaleString()) : '') + ' Km' + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -319,7 +319,7 @@
                     </tr>\
                     <tr>\
                         <th scope="row">LONGITUD</th>\
-                        <td>' + (feature.properties['LONGITUD'] !== null ? autolinker.link(feature.properties['LONGITUD'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['LONGITUD'] !== null ? autolinker.link(feature.properties['LONGITUD'].toLocaleString()) : '') + ' Km' + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -368,11 +368,11 @@
                     </tr>\
                     <tr>\
                         <th scope="row">ÁREA</th>\
-                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['ÁREA'] !== null ? autolinker.link(feature.properties['ÁREA'].toLocaleString()) : '') + 'Ha' + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">PERÍMETRO</th>\
-                        <td>' + (feature.properties['PERÍMETRO'] !== null ? autolinker.link(feature.properties['PERÍMETRO'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['PERÍMETRO'] !== null ? autolinker.link(feature.properties['PERÍMETRO'].toLocaleString()) : '') + 'Km' + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -422,7 +422,7 @@
                         <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">UBICACION</th>\
+                        <th scope="row">UBICACIÓN</th>\
                         <td>' + (feature.properties['UBICACION'] !== null ? autolinker.link(feature.properties['UBICACION'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -488,7 +488,7 @@
                 return this._div;
             };
             title.update = function () {
-                this._div.innerHTML = '<h2>GEOVISOR</h2>';
+                this._div.innerHTML = '<h2>GEOVISOR TALLER 3: SIG-WEB</h2>';
             };
             title.addTo(map);
             var abstract = new L.Control({'position':'bottomright'});
