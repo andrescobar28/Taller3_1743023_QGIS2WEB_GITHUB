@@ -53,6 +53,9 @@
         <script src="data/Ros_5.js"></script>
         <script src="data/SitiosdeInters_6.js"></script>
 
+        <script src="betterscale/L.Control.BetterScale.js"></script>
+        <link rel="stylesheet" href="betterscale/L.Control.BetterScale.css" />
+
         <script>     
         
         
@@ -539,6 +542,15 @@
         map.on("layerremove", function(){
             resetLabels([layer_Corregimientos_1]);
         });
+
+        // Se añade escala gráfica
+        L.control.betterscale({position:'bottomleft'}).addTo(map);
+
+        // Se añade escala numérica
+        L.control.scale({position:'bottomleft'}).addTo(map);
+
+        
+
 
         </script>
     </body>
