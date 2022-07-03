@@ -94,7 +94,7 @@ button:hover{
 }
 
 h5{
-    color: whitesmoke;
+    color: black;
     font-size: 15px;
     font-weight: bold
 }
@@ -110,22 +110,22 @@ h5{
     background-image: url(images/parque_salud.png);
     background-position: center;
     background-size: cover;
-    border-color: white;
+    border-color: black;
     border-style: groove;
     transition: transform 0.5s;
 }
 
 .card1{
-    background-image: url(images/parque_salud.png);
+    background-image: url(images/leafleft.png);
 }
 .card2{
-    background-image: url(images/chorro_plata.png);
+    background-image: url(images/qgis.png);
 }
 .card3{
-    background-image: url(images/cafetal.png);
+    background-image: url(images/git.png);
 }
 .card4{
-    background-image: url(images/chorrera_indio.png);
+    background-image: url(images/server.png);
 }
 
 .card:hover{
