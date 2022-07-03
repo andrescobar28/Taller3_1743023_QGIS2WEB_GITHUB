@@ -150,7 +150,30 @@
         circle.bindPopup("<h5> <center> Usted ha dado clic en el ÁREA DE INFLUENCIA <center> </h5>"+ "<center> <h3> <b> CALI ES CALI, LO DEMÁS ES LOMA </b> </h3> </center>" +
         "<center> <i> Cali, oficialmente Distrito Especial, Deportivo, Cultural, Turístico, Empresarial y de Servicios de Santiago de Cali, es un distrito colombiano, capital del departamento de Valle del Cauca, es la tercera ciudad más poblada y el tercer centro económico y cultural de Colombia.  </i> </center>");
 
-        
+        // Se añade capa de planes zonales rurales de la IDESC
+        var planes_zonales = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:nru_planes_zonales_rurales',
+            format: 'image/png',
+            transparent: true,
+            opacity: 1,
+            zIndex: 9999999
+            });
+            //map.addLayer(planes_zonales);	
+        // Se añade capa de planes zonales rurales a la leyenda
+        //leyenda.addOverlay(planes_zonales, 'Planes Zonales Rurales');
+
+         // Se añade capa de pendientes de la IDESC
+        var pendientes = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:bcs_pendientes_porcentaje',
+            format: 'image/png',
+            transparent: true,
+            opacity: 0.75
+            });
+            //map.addLayer(pendientes);	
+        // Se añade capa de pendientes a la leyenda
+        //leyenda.addOverlay(pendientes, 'Pendientes [%]');
 
         measureControl.addTo(map);
         document.getElementsByClassName('leaflet-control-measure-toggle')[0]
@@ -185,7 +208,7 @@
                         e.target._eventParents[i].resetStyle(e.target);
                     }
                 },
-                mouseover: highlightFeature,
+                //mouseover: highlightFeature,
             });
             var popupContent = '<table>\
                     <tr>\
@@ -219,7 +242,7 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(113,143,126,0.34901960784313724)',
+                fillColor: 'rgba(113,143,126,0.1)',
                 interactive: true,
             }
         }
@@ -244,7 +267,7 @@
                         e.target._eventParents[i].resetStyle(e.target);
                     }
                 },
-                mouseover: highlightFeature,
+                //mouseover: highlightFeature,
             });
             var popupContent = '<table>\
                     <tr>\
@@ -339,7 +362,7 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(10,169,15,0.2)',
+                fillColor: 'rgba(10,169,15,0.1)',
                 interactive: true,
             }
         }
@@ -586,7 +609,10 @@
         '<img src="legend/Comunas_2.png" /> Comunas': layer_Comunas_2,
         '<img src="legend/Corregimientos_1.png" /> Corregimientos': layer_Corregimientos_1,
         '<img src="legend/Corregimientos_1.png" /> Área de influencia': circle,
-        "OSM Standard": layer_OSMStandard_0,}).addTo(map);
+        "OSM Standard": layer_OSMStandard_0,
+        "Planes Zonalez IDESC": planes_zonales,
+        "Pendientes [%] IDESC": pendientes,}).addTo(map);
+        
         setBounds();
         var i = 0;
         layer_Corregimientos_1.eachLayer(function(layer) {
@@ -656,23 +682,6 @@
                     drawnItems.addLayer(layer);
                     map.addLayer(drawnItems);
                 });
-
-        
-        
-
-        var printer = L.easyPrint({
-      		tileLayer: mapabase,
-      		sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
-      		filename: 'myMap',
-      		exportOnly: true,
-      		hideControlContainer: true
-		}).addTo(map);
-
-		function manualPrint () {
-			printer.printMap('CurrentSize', 'MyManualPrint')
-		}
-
-        map.spin(false);
 
         </script>
     </body>
