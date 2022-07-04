@@ -4,3 +4,119 @@
 	left: 2.3%;
 	padding: 1.2%;
 }
+
+
+h1{
+	color: blue;
+}
+
+b{
+	color: blue;
+}
+
+.botones_plugin{
+    width: 200px;
+    z-index: 9999;
+    color: white;
+    background: black;
+	border-radius: 5px;
+	padding: 5px 10px;
+	border: 0;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.botones_plugin:hover{
+	cursor: pointer;
+    color: white;
+    background: blue;
+}
+
+.botones_plugin2{
+    width: 265px;
+    z-index: 9999;
+    color: white;
+    background: black;
+	border-radius: 5px;
+	padding: 5px 10px;
+	border: 0;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	justify-content: center;
+}
+
+.botones_plugin2:hover{
+	cursor: pointer;
+    color: white;
+    background: blue;
+}
+
+.barra{
+	background-color:#f3f3f3;
+	border-radius:5px;
+	box-shadow:inset 0px 0px 5px rgba(0,0,0,.2);
+	height:20px;
+}
+
+.cancel{
+    width: 80px;
+    z-index: 9999;
+    color: white;
+    background: red;
+	border-radius: 5px;
+	padding: 5px 10px;
+	border: 0;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	margin: 15px;
+}
+
+.cancel:hover{
+	cursor: pointer;
+    color: white;
+    background: blue;
+}
+
+.enviar{
+	width: 80px;
+	z-index: 9999;
+	color: white;
+	background: #38E826;
+	border-radius: 5px;
+	padding: 5px 10px;
+	border: 0;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	margin: 15px;
+}
+	
+.enviar:hover{
+	cursor: pointer;
+	color: white;
+	background: blue;
+}
+
+.barra_azul{
+	background-color:#247CC0;
+    border-radius:10px;
+    display:block;
+	height:25px;
+    Line-height:25px;
+    text-align:center;
+	width:0%;
+}
+
+.barra_verde{
+   background-color:#2EA265;
+}
+
+.barra_roja{
+   background-color:#DE3152;
+}
+
+#form_subir{
+	margin:1.5%0;
+	padding:2%;
+}
+
+#barra_estado span{
+	color:#fff;
+    font-weight:bold;
+    line-height:20px;
+}

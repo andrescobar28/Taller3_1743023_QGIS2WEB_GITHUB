@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
 
+        <link rel="stylesheet" href="slidemenu/L.Control.SlideMenu.css">
+
         <!-- Se importa el archivo que contiene los estilos-->
         <link rel="stylesheet" href="style.css">
 
@@ -73,6 +75,12 @@
 
         <!-- Añadir cuadrícula de coordenadas-->
         <script src="graticule/Leaflet.Graticule.js"></script>
+
+        <!-- Añadir espacio para información del plugin-->
+        <script src="slidemenu/L.Control.SlideMenu.js"></script>
+
+        <!-- Añadir funciones para añadir Archivos CSV-->
+        <scrip src="control_capa_csv.js"></scrip>
         
         <script>     
         
@@ -109,8 +117,23 @@
         }).addTo(map);
 
 
-        
-        
+        // Boton para añadir capa CSV
+        var left  = '<h1> <center> Añadir Nueva Capa CSV </center> </h1>';
+
+        // Definir contenido del Slide
+        var contents = '<hr>';
+        // Mostrar información sobre el plugin
+        contents += '<h4><p align="center">Ha habilitado el PLUGIN para añadir una nueva capa a partir de un Archivo CSV. Asegúrese de que su archivo posea LATITUD, LONGITUD, VALOR Z y descripción (opcional).</p></h4>';
+		// Añadir botón para descargar plantilla de adición
+        contents += '<center><a href="https://drive.google.com/u/0/uc?id=1e3gfk_QDo9GiXCBILYe0EeRLCDTYx-TV&export=download"><button type="button" class = "botones_plugin"> Descargar Plantilla CSV </button></a><center>'
+        // Mostrar información acerca de añadir el archivo CSV
+        contents += '<br><center><i><b><p>Seleccione el archivo CSV y el nombre de la capa a agregar <br>**** Asegúrese de haber usado la plantilla ****<p></b></i></center>'
+        contents += '<p>NOTA: El nombre del archivo se asignará a la Leyenda del Mapa</p>'
+            // Se añade opción para seleccionar el archivo CSV (Solo permite seleccionar .csv)
+        contents += '<form action="" id="form_subir"><div class="form-1-2"><input type="file" name="archivo" class="botones_plugin2" accept=".csv" required><p></p></div><div class="barra"><div class="barra_azul" id="barra_estado"><span></span></div></div><div class="acciones"> <input type="submit" class="enviar" value="Enviar"><input type="button" class="cancel" id="cancelar" value="Cancelar"></div></form>'
+
+        var slideMenu = L.control.slideMenu('', {width: '30%', height: '450px', delay: '50', icon: 'fa-chevron-right'}).addTo(map);
+        slideMenu.setContents(left + contents);
 
 
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
@@ -818,12 +841,12 @@
         
 
         // Añadir botón de nueva CAPA en FORMATO CSV
-        L.easyButton('<img src="img/nuevo.png"  align="absmiddle" height="16px" >', function() 
+        /*L.easyButton('<img src="img/nuevo.png"  align="absmiddle" height="16px" >', function() 
             {
             alert('Ha habilitado el PLUGIN para añadir una nueva capa a partir de un Archivo CSV. Asegúrese de que su archivo posea LATITUD, LONGITUD, VALOR Z y descripción (opcional). IMPORTANTE: Haga uso del formato que se descargará de forma AUTOMÁTICA.');
             window.location.href = 'https://drive.google.com/u/0/uc?id=1e3gfk_QDo9GiXCBILYe0EeRLCDTYx-TV&export=download';
         }).addTo(map);
-
+        */
         
         
         </script>
