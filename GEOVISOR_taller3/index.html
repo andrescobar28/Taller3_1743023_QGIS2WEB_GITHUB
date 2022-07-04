@@ -50,6 +50,9 @@
         <script src="data/Ros_5.js"></script>
         <script src="data/SitiosdeInters_6.js"></script>
 
+        <!-- Añadir nueva capa en formato GeoJSON-->
+        <script src="layers/sitm.js"></script>
+
         <!-- Añadir escala -->
         <script src="betterscale/L.Control.BetterScale.js"></script>
         <link rel="stylesheet" href="betterscale/L.Control.BetterScale.css" />
@@ -66,12 +69,16 @@
         <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.draw/src/leaflet.draw.css"/>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
         <script src="spin/spin.min.js" charset="utf-8"></script>
-	    <script src="spin/leaflet.spin.min.js" charset="utf-8"></script>        
+	    <script src="spin/leaflet.spin.min.js" charset="utf-8"></script> 
 
-
+        <!-- Añadir cuadrícula de coordenadas-->
+        <script src="graticule/Leaflet.Graticule.js"></script>
+   
+        
         <script>     
         
         
+
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
@@ -94,6 +101,9 @@
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
 
+
+        
+
         // Añadir botón de restauración
         L.easyButton('<img src="img/restart.png"  align="absmiddle" height="16px" >', function() 
             {
@@ -102,7 +112,7 @@
         }).addTo(map);
 
 
-
+        
 
 
 
@@ -138,6 +148,15 @@
 
             map.on('click', onMapClick);
 
+        var Mapa_Base_2 = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', 
+            {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' 
+            });
+        
+
+
+                
         // Añade una capa de un circulo, correspondiente al área de influencia [3.40949872738342, -76.57336149405727]
         var circle = L.circle([3.40949872738342, -76.57336149405727], {
             color: 'red',
@@ -145,10 +164,13 @@
             fillOpacity: 0.1,
             radius: 20000,
             zIndex: 9999
-        }).addTo(map);
+        })//.addTo(map);
 
         circle.bindPopup("<h5> <center> Usted ha dado clic en el ÁREA DE INFLUENCIA <center> </h5>"+ "<center> <h3> <b> CALI ES CALI, LO DEMÁS ES LOMA </b> </h3> </center>" +
         "<center> <i> Cali, oficialmente Distrito Especial, Deportivo, Cultural, Turístico, Empresarial y de Servicios de Santiago de Cali, es un distrito colombiano, capital del departamento de Valle del Cauca, es la tercera ciudad más poblada y el tercer centro económico y cultural de Colombia.  </i> </center>");
+        // Se define estilo para mostrar la etiqueta de cada punto
+
+        
 
         // Se añade capa de planes zonales rurales de la IDESC
         var planes_zonales = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
@@ -157,9 +179,9 @@
             format: 'image/png',
             transparent: true,
             opacity: 1,
-            zIndex: 9999999
+            zIndex: 9999
             });
-            //map.addLayer(planes_zonales);	
+            map.addLayer(planes_zonales);	
         // Se añade capa de planes zonales rurales a la leyenda
         //leyenda.addOverlay(planes_zonales, 'Planes Zonales Rurales');
 
@@ -174,6 +196,61 @@
             //map.addLayer(pendientes);	
         // Se añade capa de pendientes a la leyenda
         //leyenda.addOverlay(pendientes, 'Pendientes [%]');
+        
+        // Se añade capa de red geodésica de la IDESC
+        var red_geodesica = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/idesc/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:mc_red_control_geodesico',
+            format: 'image/png',
+            transparent: true,
+            opacity: 1,
+            zIndex: 9999
+            });
+            //map.addLayer(red_geodesica);	
+        // Se añade capa de red geodésica a la leyenda
+        //leyenda.addOverlay(red_geodesica, 'Red Geodésica');
+        
+        // Se añade capa de suelos de protección agricola rural de la IDESC
+        var proteccion_agricola = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:nru_suelo_proteccion_agricola',
+            format: 'image/png',
+            transparent: true,
+            opacity: 1,
+            zIndex: 9999
+            });
+            //map.addLayer(proteccion_agricola);	
+        // Se añade capa de suelos de proyección agricola rural a la leyenda
+        //leyenda.addOverlay(proteccion_agricola, 'Suelo de Protección Agrícola Rural');
+
+        // Se añade capa de plantas de tratamiento zonas rurales de la IDESC
+        var plantas_tratamiento = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:spu_ard_ptar_rural',
+            format: 'image/png',
+            transparent: true,
+            opacity: 1,
+            zIndex: 9999
+            });
+            //map.addLayer(plantas_tratamiento);	
+        // Se añade capa de plantas de tratamiento zonas rurales a la leyenda
+        //leyenda.addOverlay(plantas_tratamiento, 'Plantas Tratamiento Aguas Residuales Rurales');
+
+        // Se añade capa de ecoparqeues de la IDESC
+        var ecoparques = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:amb_eep_aeie_ecoparques',
+            format: 'image/png',
+            transparent: true,
+            opacity: 0.8,
+            zIndex: 9999
+            });
+            //map.addLayer(ecoparques);	
+        // Se añade capa de ecoparques a la leyenda
+        //leyenda.addOverlay(ecoparques, 'Ecoparques');
+
+        
+
 
         measureControl.addTo(map);
         document.getElementsByClassName('leaflet-control-measure-toggle')[0]
@@ -199,6 +276,24 @@
             maxNativeZoom: 19,
         });
         
+        var estilo = 
+            {
+                radius: 5,
+                fillColor: "blue",
+                color: "black",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 1,
+            };
+        
+        var marcador = L.geoJSON(sitm,{onEachFeature:function(feature, layer){
+            layer.bindTooltip("<h1>"+feature.properties.nombre+"</h1>",{permanent: false, className: 'labelstyle', 
+        direction:'top', opacity: 1}).openTooltip()
+        }, pointToLayer:function(feature, latlng) {return L.circleMarker(latlng, estilo)}})//.addTo(map);
+
+        console.log(marcador);
+
+
         layer_OSMStandard_0;
         map.addLayer(layer_OSMStandard_0);
         function pop_Corregimientos_1(feature, layer) {
@@ -324,7 +419,7 @@
                         e.target._eventParents[i].resetStyle(e.target);
                     }
                 },
-                mouseover: highlightFeature,
+                //mouseover: highlightFeature,
             });
             var popupContent = '<table>\
                     <tr>\
@@ -387,7 +482,7 @@
                         e.target._eventParents[i].resetStyle(e.target);
                     }
                 },
-                mouseover: highlightFeature,
+                //mouseover: highlightFeature,
             });
             var popupContent = '<table>\
                     <tr>\
@@ -444,7 +539,7 @@
                         e.target._eventParents[i].resetStyle(e.target);
                     }
                 },
-                mouseover: highlightFeature,
+                //mouseover: highlightFeature,
             });
             var popupContent = '<table>\
                     <tr>\
@@ -492,6 +587,11 @@
         });
         bounds_group.addLayer(layer_Ros_5);
         map.addLayer(layer_Ros_5);
+
+
+        
+
+ 
         function pop_SitiosdeInters_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -499,7 +599,7 @@
                         e.target._eventParents[i].resetStyle(e.target);
                     }
                 },
-                mouseover: highlightFeature,
+                //mouseover: highlightFeature,
             });
             var popupContent = '<table>\
                     <tr>\
@@ -566,7 +666,12 @@
 
         bounds_group.addLayer(layer_SitiosdeInters_6);
         cluster_SitiosdeInters_6.addTo(map);
-            var title = new L.Control();
+
+        
+
+
+
+        var title = new L.Control();
             title.onAdd = function (map) {
                 this._div = L.DomUtil.create('div', 'info');
                 this.update();
@@ -601,17 +706,27 @@
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
+
+
+        
+
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/SitiosdeInters_6.png" /> Sitios de Interés': cluster_SitiosdeInters_6,
-        '<img src="legend/Ros_5.png" /> Ríos': layer_Ros_5,
-        '<img src="legend/JerarquizacinVial_4.png" /> Jerarquización Vial': layer_JerarquizacinVial_4,
-        '<img src="legend/Barrios_3.png" /> Barrios': layer_Barrios_3,
-        '<img src="legend/Comunas_2.png" /> Comunas': layer_Comunas_2,
-        '<img src="legend/Corregimientos_1.png" /> Corregimientos': layer_Corregimientos_1,
-        '<img src="legend/Corregimientos_1.png" /> Área de influencia': circle,
-        "OSM Standard": layer_OSMStandard_0,
-        "Planes Zonalez IDESC": planes_zonales,
-        "Pendientes [%] IDESC": pendientes,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SitiosdeInters_6.png" /> QGIS2WEB: Sitios de Interés': cluster_SitiosdeInters_6,
+        '<img src="legend/Ros_5.png" /> QGIS2WEB: Ríos': layer_Ros_5,
+        '<img src="legend/JerarquizacinVial_4.png" /> QGIS2WEB: Jerarquización Vial': layer_JerarquizacinVial_4,
+        '<img src="legend/Barrios_3.png" /> QGIS2WEB: Barrios': layer_Barrios_3,
+        '<img src="legend/Comunas_2.png" /> QGIS2WEB: Comunas': layer_Comunas_2,
+        '<img src="legend/Corregimientos_1.png" /> QGIS2WEB: Corregimientos': layer_Corregimientos_1,
+        '<img src="legend/Corregimientos_1.png" /> DIBUJADA: Área de influencia': circle,
+        "Mapa Base 1: OSM Standard Type 1": layer_OSMStandard_0,
+        "Mapa Base 2: OSM Standard Type 2": Mapa_Base_2,
+        "IDESC: Planes Zonales ": planes_zonales,
+        "IDESC: Pendientes [%]": pendientes,
+        "IDESC: Red Geodésica": red_geodesica,
+        "IDESC: Suelos de Protección Agrícola": proteccion_agricola,
+        "IDESC: PTAR Zona Rural": plantas_tratamiento,
+        "IDESC: Ecoparques": ecoparques,
+        "GeoJSON: Estaciones SITM": marcador,}).addTo(map);
         
         setBounds();
         var i = 0;
@@ -638,12 +753,28 @@
             resetLabels([layer_Corregimientos_1]);
         });
 
+
         // Se añade escala gráfica
         L.control.betterscale({position:'bottomleft'}).addTo(map);
 
         // Se añade escala numérica
         L.control.scale({position:'bottomleft'}).addTo(map);
+
         
+        
+        L.latlngGraticule({
+			showLabel: true,
+			opacity:1,
+            weight: 0.4,
+			color: 'black',
+			zoomInterval: [
+				{start: 1, end: 28, interval: 0.25}
+			]
+		}).addTo(map);
+
+
+        
+
         // Se añade MiniMapa
 
         var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -651,6 +782,8 @@
 
         var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 8, attribution: osmAttrib });
 		var miniMap2 = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
+
+        
 
         // Añadir herramientas de medición
         var drawnItems = new L.FeatureGroup();
@@ -682,7 +815,7 @@
                     drawnItems.addLayer(layer);
                     map.addLayer(drawnItems);
                 });
-
+        
         </script>
     </body>
 </html>
