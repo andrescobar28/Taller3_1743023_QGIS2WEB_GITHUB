@@ -73,9 +73,9 @@
 
         <!-- Añadir cuadrícula de coordenadas-->
         <script src="graticule/Leaflet.Graticule.js"></script>
-   
         
         <script>     
+        
         
         
 
@@ -101,9 +101,6 @@
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
 
-
-        
-
         // Añadir botón de restauración
         L.easyButton('<img src="img/restart.png"  align="absmiddle" height="16px" >', function() 
             {
@@ -113,7 +110,7 @@
 
 
         
-
+        
 
 
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
@@ -293,6 +290,7 @@
         }, pointToLayer:function(feature, latlng) {return L.circleMarker(latlng, estilo)}})//.addTo(map);
 
         console.log(marcador);
+
 
 
         layer_OSMStandard_0;
@@ -706,10 +704,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .title += 'Search for a place';
-
-
-        
+        .title += 'Geocodificación';
 
         var baseMaps = {};
         L.control.layers(baseMaps,{'<img src="legend/SitiosdeInters_6.png" /> QGIS2WEB: Sitios de Interés': cluster_SitiosdeInters_6,
@@ -755,11 +750,14 @@
         });
 
 
+ 
         // Se añade escala gráfica
         L.control.betterscale({position:'bottomleft'}).addTo(map);
 
         // Se añade escala numérica
         L.control.scale({position:'bottomleft'}).addTo(map);
+
+        
 
         
         
@@ -816,6 +814,17 @@
                     drawnItems.addLayer(layer);
                     map.addLayer(drawnItems);
                 });
+        
+        
+
+        // Añadir botón de nueva CAPA en FORMATO CSV
+        L.easyButton('<img src="img/nuevo.png"  align="absmiddle" height="16px" >', function() 
+            {
+            alert('Ha habilitado el PLUGIN para añadir una nueva capa a partir de un Archivo CSV. Asegúrese de que su archivo posea LATITUD, LONGITUD, VALOR Z y descripción (opcional). IMPORTANTE: Haga uso del formato que se descargará de forma AUTOMÁTICA.');
+            window.location.href = 'https://drive.google.com/u/0/uc?id=1e3gfk_QDo9GiXCBILYe0EeRLCDTYx-TV&export=download';
+        }).addTo(map);
+
+        
         
         </script>
     </body>
