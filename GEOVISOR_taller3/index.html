@@ -278,16 +278,17 @@
         
         var estilo = 
             {
-                radius: 5,
+                radius: 3,
                 fillColor: "blue",
                 color: "black",
                 weight: 1,
                 opacity: 1,
                 fillOpacity: 1,
+                pane: 'pane_SitiosdeInters_6'
             };
         
         var marcador = L.geoJSON(sitm,{onEachFeature:function(feature, layer){
-            layer.bindTooltip("<h1>"+feature.properties.nombre+"</h1>",{permanent: false, className: 'labelstyle', 
+            layer.bindTooltip("<h1>"+feature.properties.nombre+"</h1 >",{permanent: false, className: 'labelstyle', 
         direction:'top', opacity: 1}).openTooltip()
         }, pointToLayer:function(feature, latlng) {return L.circleMarker(latlng, estilo)}})//.addTo(map);
 
@@ -781,7 +782,7 @@
 	    var osmAttrib='Map data &copy; OpenStreetMap contributors';
 
         var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 8, attribution: osmAttrib });
-		var miniMap2 = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
+		var miniMap2 = new L.Control.MiniMap(osm2, { toggleDisplay: true, minimized: true }).addTo(map);
 
         
 
